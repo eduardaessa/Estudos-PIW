@@ -10,10 +10,6 @@ module.exports = function(){
        curso: {
            type: String,
            required: true
-       },
-       _id: {
-        type: Number,
-        required: true
     },
    });
    return mongoose.model('Aluno', schema);
