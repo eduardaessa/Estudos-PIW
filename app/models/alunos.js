@@ -4,13 +4,17 @@ let mongoose = require('mongoose');
 module.exports = function(){
    let schema = mongoose.Schema({
        nome: {
-           type:String,
-           required: true
+            type:String,
+            required: true
        },
        curso: {
-           type: String,
-           required: true
+            type: String,
+            required: true
+       },
+       matricula: {
+            type: String,
+            required: true
     },
-   });
-   return mongoose.model('Aluno', schema);
+    });
+    return mongoose.model('Aluno', schema);
 }();
