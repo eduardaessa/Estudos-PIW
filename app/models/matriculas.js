@@ -3,18 +3,15 @@ let mongoose = require('mongoose');
 
 module.exports = function(){
    let schema = mongoose.Schema({
-       nome: {
-           type:String,
-           required: true
+       aluno:{
+           type: mongoose.Schema.ObjectId,
+           ref: 'Aluno'
        },
-       curso: {
-           type: String,
-           required: true
-       },
-       _id: {
-        type: Number,
-        required: true
-    },
+       disciplina:{
+           type: mongoose.Schema.ObjectId,
+           ref: 'Disciplina'
+       }
    });
-   return mongoose.model('Aluno', schema);
+   return mongoose.model('Matricula', schema);
 }();
+
