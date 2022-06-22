@@ -1,6 +1,7 @@
 const express = require("express");
 const routerAluno = require("../app/routes/alunos");
 const routerDisciplina = require("../app/routes/disciplinas");
+const routerMatricula = require("../app/routes/matriculas");
 const bodyParser = require("body-parser");
 const db = require('../config/database.js');
 
@@ -14,6 +15,8 @@ module.exports = function() {
     }));
     routerDisciplina(app);
     routerAluno(app);
+    routerMatricula(app);
+
     return app;
 };
 

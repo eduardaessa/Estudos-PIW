@@ -1,10 +1,12 @@
 let Matricula = require('../models/matriculas.js');
+let view = require('../views/matriculas.js')
+
 
 module.exports.inserirMatricula = function(req, res){
     let promise = Matricula.create(req.body);
     promise.then(
-        (aluno) =>{
-            res.status(201).json(contato);
+        (matricula) =>{
+            res.status(201).json(view.render(matricula));
         }
     ).catch(
         (erro)=>{
@@ -14,11 +16,11 @@ module.exports.inserirMatricula = function(req, res){
  }
  
 
-module.exports.listarDisciplinas = function(req,res){
-   let promise = Disciplina.find().exec();
+module.exports.listarMatriculas = function(req,res){
+   let promise = Matricula.find().exec();
    promise.then(
-       function(disciplinas){
-           res.json(disciplinas)
+       function(matriculas){
+           res.json(view.renderMany(matriculas))
        }
    ).catch(
        function(error){
@@ -27,12 +29,13 @@ module.exports.listarDisciplinas = function(req,res){
 );
 }
 
-module.exports.acharDisciplina = function(req,res){
-    let promise = Disciplina.findById(req.params.id).exec();
+module.exports.buscarMatriculaPorId = function(req,res){
+    let id = req.params.id;
+    let promise = Matricula.findById(id).exec();
     console.log(req.params.id)
     promise.then(
-        function(disciplina){
-            res.json(disciplina)
+        function(matricula){
+            res.json(view.render(matricula))
         }
     ).catch(
         function(error){
@@ -42,11 +45,12 @@ module.exports.acharDisciplina = function(req,res){
  }
 
 
-module.exports.deletarDisciplina = function(req, res){
-    let promise = Disciplina.findByIdAndDelete(req.params.id).exec();
+module.exports.deletarMatricula = function(req, res){
+    let id = req.params.id;
+    let promise = Matricula.findByIdAndDelete(id).exec();
    promise.then(
-       function(disciplina){
-           res.json(disciplina)
+       function(matricula){
+           res.json(view.render(matricula))
        }
    ).catch(
        function(error){
