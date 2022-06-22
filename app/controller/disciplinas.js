@@ -24,12 +24,13 @@ module.exports.listarDisciplinas = function (req, res) {
     });
 };
 
-module.exports.acharDisciplina = function (req, res) {
-  let promise = Disciplina.findById(req.params.id).exec();
+module.exports.buscarDisciplinaPorId = function (req, res) {
+    let id = req.params.id;
+  let promise = Disciplina.findById(id).exec();
   console.log(req.params.id);
   promise
     .then(function (disciplina) {
-      res.json(disciplina);
+      res.json(view.render(disciplina));
     })
     .catch(function (error) {
       res.status(500).json(error);
@@ -37,7 +38,8 @@ module.exports.acharDisciplina = function (req, res) {
 };
 
 module.exports.deletarDisciplina = function (req, res) {
-  let promise = Disciplina.findByIdAndDelete(req.params.id).exec();
+    let id = req.params.id;
+  let promise = Disciplina.findByIdAndDelete(id).exec();
   promise
     .then(function (disciplina) {
       res.json(disciplina);
