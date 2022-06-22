@@ -27,30 +27,31 @@ module.exports.listarAlunos = function(req,res){
 );
 }
 
-module.exports.acharAluno = function(req,res){
-    let promise = Aluno.findById(req.params.id).exec();
-    console.log(req.params.id)
+module.exports.buscarAlunoPorId = function(req,res){
+    let id = req.params.id;
+    let promise = Aluno.findById(id).exec();
     promise.then(
         function(aluno){
-            res.json(aluno)
+            res.status(200).json(view.render(aluno))
         }
     ).catch(
         function(error){
-            res.status(500).json(error);
+            res.status(400).json({mensagem:"Não funfou", error:error});
         }
  );
  }
 
 
 module.exports.deletarAluno = function(req, res){
-    let promise = Aluno.findByIdAndDelete(req.params.id).exec();
+    let id = req.params.id;
+    let promise = Aluno.findByIdAndDelete(id).exec();
    promise.then(
        function(aluno){
-           res.json(aluno)
+           res.json(view.render(aluno))
        }
    ).catch(
        function(error){
-           res.status(500).json(error);
+           res.status(500).json({mensagem: "Deu erro", error:error});
        }
     );
 };
