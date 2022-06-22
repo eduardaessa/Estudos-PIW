@@ -1,10 +1,11 @@
 let Aluno = require('../models/alunos.js');
+const view = require('../views/alunos.js');
 
 module.exports.inserirAluno = function(req, res){
     let promise = Aluno.create(req.body)
     promise.then(
         function(aluno){
-            res.status(201).json(aluno);
+            res.status(201).json(view.render(aluno));
         }
     ).catch(
         function(erro){
@@ -17,7 +18,7 @@ module.exports.listarAlunos = function(req,res){
    let promise = Aluno.find().exec();
    promise.then(
        function(alunos){
-           res.json(alunos)
+           res.json(view.renderMany(alunos))
        }
    ).catch(
        function(error){

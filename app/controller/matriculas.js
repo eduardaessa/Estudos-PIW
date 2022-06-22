@@ -1,17 +1,18 @@
-let Disciplina = require('../models/disciplinas.js');
+let Matricula = require('../models/matriculas.js');
 
-module.exports.inserirDisciplina = function(req, res){
-    let promise = Disciplina.create(req.body)
+module.exports.inserirMatricula = function(req, res){
+    let promise = Matricula.create(req.body);
     promise.then(
-        function(disciplina){
-            res.status(201).json(disciplina);
+        (aluno) =>{
+            res.status(201).json(contato);
         }
     ).catch(
-        function(erro){
+        (erro)=>{
             res.status(500).json(erro);
         }
-    )
-}
+ );
+ }
+ 
 
 module.exports.listarDisciplinas = function(req,res){
    let promise = Disciplina.find().exec();
