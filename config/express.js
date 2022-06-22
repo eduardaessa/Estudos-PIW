@@ -1,5 +1,6 @@
 const express = require("express");
 const routerAluno = require("../app/routes/alunos");
+const routerDisciplina = require("../app/routes/disciplinas");
 const bodyParser = require("body-parser");
 const db = require('../config/database.js');
 
@@ -11,7 +12,7 @@ module.exports = function() {
     app.use(bodyParser.urlencoded({
         extended: false
     }));
-
+    routerDisciplina(app);
     routerAluno(app);
     return app;
 };

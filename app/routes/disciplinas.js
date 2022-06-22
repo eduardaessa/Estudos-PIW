@@ -1,8 +1,8 @@
 const controller = require("../controller/disciplinas.js");
 
 module.exports = function(app) {
-    app.get("/alunos", controller.listarDisciplinas),
-    app.delete("/alunos/:id", controller.deletarDisciplina),
-    app.post("/alunos", controller.inserirDisciplina),
-    app.get("/alunos/:id", controller.acharDisciplina)
+    app.get("/disciplinas", controller.listarDisciplinas),
+    app.delete("/disciplinas/:id", controller.deletarDisciplina),
+    app.post("/disciplinas", controller.inserirDisciplina),
+    app.get("/disciplinas/:id", controller.acharDisciplina)
 }
