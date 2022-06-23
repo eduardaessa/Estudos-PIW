@@ -76,6 +76,6 @@ module.exports.obterDisciplinas = function(req, res){
         let disciplinas = matriculas.map(function(matricula){return matricula.disciplina});
         res.status(200).json(viewDisciplinas.renderMany(disciplinas));
     }).catch(function(error){
-        res.status(500).json({error:error})
+        res.status(500).json({error:error})  
     })
 }

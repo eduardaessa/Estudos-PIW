@@ -1,5 +1,6 @@
 let Matricula = require('../models/matriculas.js');
-let view = require('../views/matriculas.js')
+let view = require('../views/matriculas.js');
+
 
 
 module.exports.inserirMatricula = function(req, res){
@@ -17,10 +18,13 @@ module.exports.inserirMatricula = function(req, res){
  
 
 module.exports.listarMatriculas = function(req,res){
-   let promise = Matricula.find().populate("disciplina").populate("aluno").exec();
+   let promise = Matricula.find()
+                        .populate("disciplina")
+                        .populate("aluno")
+                        .exec();
    promise.then(
        function(matriculas){
-           res.json(matriculas)
+           res.json(view.renderMany(matriculas));
        }
    ).catch(
        function(error){
