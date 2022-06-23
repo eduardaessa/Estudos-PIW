@@ -1,5 +1,8 @@
 let Aluno = require('../models/alunos.js');
+const Matricula = require('../models/matriculas.js');
+const Disciplina = require('../models/disciplinas.js');
 const view = require('../views/alunos.js');
+const viewDisciplinas = require('../views/disciplinas.js');
 
 module.exports.inserirAluno = function(req, res){
     let promise = Aluno.create(req.body)
@@ -55,3 +58,24 @@ module.exports.deletarAluno = function(req, res){
        }
     );
 };
+
+module.exports.obterMatriculas = function(req, res){
+    let id = req.params.id;
+    let promise = Matricula.find({aluno:id}).populate("disciplina").exec();
+    promise.then(function(matriculas){
+        res.status(200).json(matriculas);
+    }).catch(function(error){
+        res.status(500).json({error:error})
+    })
+};
+
+module.exports.obterDisciplinas = function(req, res){
+    let id = req.params.id;
+    let promise = Matricula.find({aluno:id}).populate("disciplina").exec();
+    promise.then(function(matriculas){
+        let disciplinas = matriculas.map(function(matricula){return matricula.disciplina});
+        res.status(200).json(viewDisciplinas.renderMany(disciplinas));
+    }).catch(function(error){
+        res.status(500).json({error:error})
+    })
+}
