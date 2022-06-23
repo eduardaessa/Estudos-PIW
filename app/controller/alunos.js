@@ -3,9 +3,17 @@ const Matricula = require('../models/matriculas.js');
 const Disciplina = require('../models/disciplinas.js');
 const view = require('../views/alunos.js');
 const viewDisciplinas = require('../views/disciplinas.js');
+const { rawListeners } = require('../models/alunos.js');
+const bcrypt = require("bcrypt");
 
 module.exports.inserirAluno = function(req, res){
-    let promise = Aluno.create(req.body)
+    let aluno = {
+        nome: req.body.nome,
+        curso: req.body.curso,
+        matricula: req.body.matricula,
+        senha: bcrypt.hashSync(req.body.senha, 10)
+    }
+    let promise = Aluno.create(aluno)
     promise.then(
         function(aluno){
             res.status(201).json(view.render(aluno));

@@ -14,7 +14,11 @@ module.exports = function(){
        matricula: {
             type: String,
             required: true
-    },
+     },
+     senha: {
+          type: String,
+          required: true
+     },
     });
     return mongoose.model('Aluno', schema);
 }();

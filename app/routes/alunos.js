@@ -1,6 +1,9 @@
 const controller = require("../controller/alunos.js");
+const controllerAuth = require('../controllers/auth.js')
+
 
 module.exports = function(app) {
+    app.post("/alunos/signin", controllerAuth.logar),
     app.get("/alunos", controller.listarAlunos),
     app.get("/alunos/:id/matriculas", controller.obterMatriculas),
     app.get("/alunos/:id/disciplinas", controller.obterDisciplinas),
