@@ -17,6 +17,13 @@ module.exports.logar = function(req,res){
         })
 }
 
-module.exports.checar = function(req, res){
-    console.log(req.headers);
+module.exports.checar = function(req, res, next){
+    let token = req.headers.token;
+    jwt.verify(token, "senha_secreta", function(err, decoded){
+        if(err){
+            res.status(401).send("Token inválido!");
+        } else {
+            next();
+        }
+    })
 }

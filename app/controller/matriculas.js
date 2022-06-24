@@ -1,10 +1,15 @@
 let Matricula = require('../models/matriculas.js');
 let view = require('../views/matriculas.js');
-
-
+const jwt = require('jsonwebtoken');
 
 module.exports.inserirMatricula = function(req, res){
-    let promise = Matricula.create(req.body);
+    let matricula = req.body;
+    let id_disciplina = req.body.disciplina;
+    let token = req.headers.token;
+    let payload = jwt.decode(token);
+    let id_usuario_logado = payload.id;
+
+    let promise = Matricula.create({disciplina: id_disciplina, aluno: id_usuario_logado});
     promise.then(
         (matricula) =>{
             res.status(201).json(view.render(matricula));
