@@ -6,7 +6,7 @@ module.exports.logar = function(req,res){
     Aluno.findOne({matricula: req.body.matricula})
         .then(function(aluno){
             if(bcrypt.compareSync(req.body.senha, aluno.senha)){
-                let token = jwt.sign({id: aluno._id}, "senha secreta");
+                let token = jwt.sign({id: aluno._id}, "senha_secreta");
                 console.log(token);
                 res.status(200).json({token:token})
             }else{
@@ -15,4 +15,8 @@ module.exports.logar = function(req,res){
         }).catch(function(error){
             res.status(401).send('Invalid login');
         })
+}
+
+module.exports.checar = function(req, res){
+    console.log(req.headers);
 }
