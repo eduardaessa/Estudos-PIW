@@ -6,6 +6,7 @@ const viewDisciplinas = require('../views/disciplinas.js');
 const { rawListeners } = require('../models/alunos.js');
 const bcrypt = require("bcrypt");
 
+
 module.exports.inserirAluno = function(req, res){
     let aluno = {
         nome: req.body.nome,

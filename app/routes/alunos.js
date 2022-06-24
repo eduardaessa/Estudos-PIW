@@ -1,5 +1,5 @@
 const controller = require("../controller/alunos.js");
-const controllerAuth = require('../controllers/auth.js')
+const controllerAuth = require('../controller/auth.js')
 
 
 module.exports = function(app) {
